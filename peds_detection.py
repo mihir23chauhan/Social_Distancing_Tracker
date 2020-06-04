@@ -10,6 +10,7 @@ from scipy.spatial import distance as dist
 
 confid = 0.5
 thresh = 0.5
+MIN_DIST = 50 # min distance in pixels
 #Link to video file and where to output
 def create_arg_parser():
     parser = argparse.ArgumentParser(description="Path to input and output directory")
@@ -111,6 +112,35 @@ while True:
 
             r = (confidences[i], (x,y,x+w, y+h), centroids[i])
             results.append(r)
+
+    violate = set()
+
+    if len(results) >= 2:
+        #we extract all centroid from the results and compute the
+        # Euclidian disntace between all pairs. Here we take the pixel distnace
+        centroids = np.array([r[2] for r in results])
+        D = dist.cdist(centroids, centroids, metric='euclidean')
+
+        for i in range(0, D.shape[0]):
+            for j in range(i+1, D.shape[1]):
+                if D[i,j] < MIN_DIST:
+                    violate.add(i)
+                    violate.add(j)
+
+    for (i, (prob, bbox, centroid)) in enumerate(results):
+        (startX, startY, endX, endY) = bbox
+        (cX, cY) = centroid
+        color = (0, 255, 0)
+
+        if i in violate:
+            color = (0, 0, 255)
+
+        cv2.rectangle(frame, (startX, startY), (endX, endY), color, 2)
+        cv2.circle(frame, (cX,cY), 5, color, 1)
+
+    text = "Total Violations: {}".format(len(violate))
+    cv2.putText(frame, text, (10, frame.shape[0] -25) , cv2.FONT_HERSHEY_SIMPLEX, 0.85, (0,0, 255), 4)
+
 
     if writer is None:
         writer = cv2.VideoWriter(str(parsed_args.outputDirectory), fourcc, 30, (frame.shape[1], frame.shape[0]), True)
