@@ -6,6 +6,7 @@ import sys
 import os
 import argparse
 from pathlib import Path
+from scipy.spatial import distance as dist
 
 confid = 0.5
 thresh = 0.5
@@ -20,6 +21,8 @@ def create_arg_parser():
 arg_parser = create_arg_parser()
 parsed_args = arg_parser.parse_args(sys.argv[1:])
  
+
+
 labelsPath = "yolo-coco//coco.names"
 #LABELS contains all the types of items which can be detected in the form of a list
 LABELS =  open(labelsPath).read().strip().split("\n")
@@ -28,6 +31,10 @@ COLORS = np.random.randint(0, 255, size=(len(LABELS), 3), dtype="uint8")
 
 weightsPath = 'yolo-coco/yolov3.weights'
 configPath = 'yolo-coco/yolov3.cfg'
+
+
+
+
 #Contains all the layer names of network
 net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
 ln = net.getLayerNames()
@@ -70,6 +77,8 @@ while True:
     boxes = []
     confidences = []
     classIDs = []
+    centroids = []
+    results = []
 
     for output in layerOutputs:
         for detection in output:
@@ -88,11 +97,11 @@ while True:
 
                     boxes.append([x, y, int(width), int(height)])
                     confidences.append(float(confidence))
+                    centroids.append((centerX, centerY))
                     classIDs.append(classID)
 
 
-    idxs = cv2.dnn.NMSBoxes(boxes, confidences, confid,
-		thresh)
+    idxs = cv2.dnn.NMSBoxes(boxes, confidences, confid, thresh)
 #Drawing boxes and GUI part starts from here for measuring 
 ##############################################################################
     if len(idxs) > 0:
@@ -100,12 +109,8 @@ while True:
             (x, y) = (boxes[i][0], boxes[i][1])
             (w, h) = (boxes[i][2], boxes[i][3])
 
-            color = [int(c) for c in COLORS[classIDs[i]]]
-            cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)
-            text = "{}: {:.4f}".format(LABELS[classIDs[i]],
-				confidences[i])
-            cv2.putText(frame, text, (x, y - 5),
-				cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+            r = (confidences[i], (x,y,x+w, y+h), centroids[i])
+            results.append(r)
 
     if writer is None:
         writer = cv2.VideoWriter(str(parsed_args.outputDirectory), fourcc, 30, (frame.shape[1], frame.shape[0]), True)
@@ -121,4 +126,3 @@ while True:
 print("[INFO] cleaning up...")
 writer.release()
 vs.release()
-
