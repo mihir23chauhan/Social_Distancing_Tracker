@@ -18,17 +18,11 @@ You will need the YOLOv3 models and COCO dataset to run the file. Your file stru
 ```tree
 
 |---yolo-coco
-
 | |--coco.names
-
 | |--yolov3.weights
-
 | |--yolov3.cfg
-
 |---output
-
 |---video
-
 |---peds_detection.py
 
 ```
