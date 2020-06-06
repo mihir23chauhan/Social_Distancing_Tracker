@@ -54,11 +54,11 @@ optional arguments:
 
 -h, --help show this help message and exit
 
--i INPUTDIRECTORY, --inputDirectory INPUTDIRECTORY
+-i , --inputDirectory 
 
 Path to the input directory
 
--o OUTPUTDIRECTORY, --outputDirectory OUTPUTDIRECTORY
+-o , --outputDirectory
 
 Path to the output
 
@@ -76,3 +76,8 @@ Download the following files and place them in yolo-coco folder.
 ## Credit
 
 [Adrain Rosebrock](https://www.pyimagesearch.com/2018/11/12/yolo-object-detection-with-opencv/) for object detection post and [Ankush Chaudhari](https://www.linkedin.com/in/ankush-chaudhari/) for the function which measures the distance between two people.
+
+###Team Details -
+
+Team Name - Wingmates
+Team Memberss - Anurag Kurle, Divyanshu Meena, Mihir Chauhan, Paarth Saachan, Reuben Devanesan.
