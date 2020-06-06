@@ -4,4 +4,5 @@ Test/
 output/
 venv/
 video/
-yolo-coco/
+yolo-coco/yolov3.cfg
+yolo-coco/yolov3.weights
