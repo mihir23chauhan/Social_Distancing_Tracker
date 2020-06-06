@@ -28,7 +28,7 @@ def isclose(p1, p2):
         return 0
 
 def create_arg_parser():
-    parser = argparse.ArgumentParser(description="Path to input and output directory")
+    parser = argparse.ArgumentParser(description="Example of command - python3 ped_detection.py -i $(Path to input video) -o $(Path to output video)\n. Ex - python3 ped_detection.py -i video/input.mp4 -o output/output.avi")
 
     parser.add_argument('-i', '--inputDirectory', help='Path to the input directory', type=Path)
     parser.add_argument('-o', '--outputDirectory', help = 'Path to the output', type=Path)
