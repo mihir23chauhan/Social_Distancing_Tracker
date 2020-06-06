@@ -24,7 +24,7 @@ OpenCv4.0, Numpy, and imutils are needed.
 ```
 usage: peds_detection.py [-h] [-i INPUTDIRECTORY] [-o OUTPUTDIRECTORY]
 
-Path to input and output directory
+Example of command - python3 ped_detection.py -i $(Path to input video) -o $(Path to output video) . Ex - python3 ped_detection.py -i video/input.mp4 -o output/output.avi
 
 optional arguments:
   -h, --help            show this help message and exit
