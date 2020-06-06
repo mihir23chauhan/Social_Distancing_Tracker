@@ -64,6 +64,15 @@ Path to the output
 
 ```
 
+## Downloads
+
+Download the following files and place them in yolo-coco folder.
+
+ - [https://github.com/pjreddie/darknet/blob/master/cfg/yolov3.cfg](https://github.com/pjreddie/darknet/blob/master/cfg/yolov3.cfg)
+ - [https://pjreddie.com/media/files/yolov3.weights](https://pjreddie.com/media/files/yolov3.weights)
+
+  
+
 ## Credit
 
 [Adrain Rosebrock](https://www.pyimagesearch.com/2018/11/12/yolo-object-detection-with-opencv/) for object detection post and [Ankush Chaudhari](https://www.linkedin.com/in/ankush-chaudhari/) for the function which measures the distance between two people.
