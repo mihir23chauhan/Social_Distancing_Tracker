@@ -1,7 +1,8 @@
 
 # Social Distancing Analyzer
 
-  
+# Certificate of Completion
+![alt text](https://user-images.githubusercontent.com/62815174/121729430-178b8e00-cb0c-11eb-8e60-a13600bc52d4.jpg)
 
 Analyzes the distance between close people in a given video feed. Human detection is done using YOLOv3 model
 
