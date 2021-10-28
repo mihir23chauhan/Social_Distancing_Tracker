@@ -41,9 +41,9 @@ train_answers = train_answers[0:1000]
 
 train_questions
 
-val_contexts = val_contexts[0:192]
-val_questions = val_questions[0:192]  
-val_answers = val_answers[0:192]
+#val_contexts = val_contexts[0:192]
+#val_questions = val_questions[0:192]  
+#val_answers = val_answers[0:192]
 
 def add_end_idx(answers, contexts):
     for answer, context in zip(answers, contexts):
@@ -172,7 +172,7 @@ for batch in tqdm(eval_loader, desc='Evaluation Progess'):
         #Correct Answers
         correct_start = batch['start_positions'][i]
         correct_end = batch['end_positions'][i]
-        if( correct_start > len(tokens) ):
+        if( correct_start >= len(tokens) ):
             count += 1
             print( correct_start, len(tokens))
             continue
