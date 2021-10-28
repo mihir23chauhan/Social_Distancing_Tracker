@@ -154,6 +154,7 @@ for batch in tqdm(eval_loader, desc='Evaluation Progess'):
 
     predictions_all = []
     references_all = []
+    count = 0
 
     for i in range(0, 16):
         tokens = tokenizer.convert_ids_to_tokens(batch['input_ids'][i])
@@ -171,6 +172,11 @@ for batch in tqdm(eval_loader, desc='Evaluation Progess'):
         #Correct Answers
         correct_start = batch['start_positions'][i]
         correct_end = batch['end_positions'][i]
+        if( correct_start > len(tokens) ):
+            count += 1
+            print( correct_start, len(tokens))
+            continue
+
         correct_answer = tokens[correct_start]
         for j in range(correct_start + 1, correct_end + 1):
             if tokens[j][0:2] == '##':
@@ -198,5 +204,6 @@ for batch in tqdm(eval_loader, desc='Evaluation Progess'):
         context_idx += 1
 
     metric.add_batch(predictions=predictions_all, references=references_all)
+    print(count)
 
 metric.compute()
