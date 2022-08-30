@@ -2,7 +2,9 @@
 # Social Distancing Analyzer
 
 # Certificate of Completion
-![alt text](https://user-images.githubusercontent.com/62815174/121729430-178b8e00-cb0c-11eb-8e60-a13600bc52d4.jpg)
+![SSOP Certificate 2020 - Mihir Chauhan](https://user-images.githubusercontent.com/64193201/187384208-ce6ca350-9216-4c4f-a562-e746192067a6.jpg)
+
+
 
 Analyzes the distance between close people in a given video feed. Human detection is done using YOLOv3 model
 
